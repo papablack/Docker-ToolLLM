@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  tool_llm:
+    build: tool_llm
+    ports:
+      - "${WEB_PORT}:${WEB_PORT}"
+    volumes:
+      - ../app:/app
