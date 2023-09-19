@@ -1,3 +1,6 @@
 [submodule "app"]
 	path = app
 	url = git@github.com:OpenBMB/ToolBench.git
+[submodule "ui"]
+	path = ui
+	url = https://github.com/lilbillybiscuit/chatbot-ui-toolllama
