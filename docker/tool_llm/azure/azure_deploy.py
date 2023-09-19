@@ -8,7 +8,7 @@ ws = Workspace.from_config()
 compute_target = ComputeTarget(workspace=ws, name="your-compute-target-name")
 
 # Set up the custom Docker environment
-custom_docker_env = Environment(name="Azure-ToolLLM-env")
+custom_docker_env = Environmgit ent(name="Azure-ToolLLM-env")
 custom_docker_env.docker.enabled = True
 custom_docker_env.docker.base_image = "thepapablack/docker-tool_llm:latest"
 custom_docker_env.python.user_managed_dependencies = True
