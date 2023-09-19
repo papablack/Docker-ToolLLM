@@ -1,28 +1,8 @@
 #!/bin/bash
-cd /app
 
 export PYTHONPATH=/app
 
-python preprocess/preprocess_retriever_data.py \
-    --query_file /llm_data/data/instruction/G1_query.json \
-    --index_file /llm_data/data/test_query_ids/G1_instruction_test_query_ids.json \
-    --dataset_name G1 \
-    --output_dir /llm_data/data/retrieval/G1
-
-python toolbench/retrieval/train.py \
-    --data_path /llm_data/data/retrieval/G1/ \
-    --model_name bert-base-uncased \
-    --output_path retrieval_model \
-    --num_epochs 5 \
-    --train_batch_size 32 \
-    --learning_rate 2e-5 \
-    --warmup_steps 500 \
-    --max_seq_length 256    
-
-python preprocess/preprocess_toolllama_data.py \
-    --tool_data_dir /llm_data/data/answer/G1_answer \
-    --method DFS_woFilter_w2 \
-    --output_file /llm_data/data/answer/toolllama_G1_dfs.json  
+cd /app
 
 torchrun --nproc_per_node=$GPU_CORES --master_port=20001 toolbench/train/train_mem.py \
     --model_name_or_path huggyllama/llama-7b  \
@@ -65,7 +45,7 @@ python toolbench/inference/qa_pipeline.py \
     --rapidapi_key $RAPIDAPI_KEY \
     --use_rapidapi_key
 
-    python toolbench/inference/qa_pipeline.py \
+python toolbench/inference/qa_pipeline.py \
     --tool_root_dir /llm_data/data/toolenv/tools/ \
     --backbone_model chatgpt_function \
     --openai_key $OPENAI_KEY \

@@ -4,6 +4,7 @@ if [ ! -f /var/.llm_install_done ]; then
     # Install any needed packages specified in requirements.txt
     cd /app
     pip install --no-cache-dir -r /app/requirements.txt
+    pip install azureml-sdk
 
     if [ ! -d /llm_data/data ]; then
         if [ ! -d /llm_data ]; then
@@ -22,7 +23,7 @@ if [ ! -f /var/.llm_install_done ]; then
 
         chmod -R 777 /llm_data        
 
-        sh /var/train.sh  
+        sh /var/preprocess.sh
     fi
 
     chmod -R 777 /llm_ui        

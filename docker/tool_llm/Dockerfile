@@ -22,18 +22,24 @@ ENV PATH="${NVM_DIR}/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 
 COPY install.sh /var/install.sh
 COPY entrypoint.sh /var/entrypoint.sh
-COPY train.sh /var/train.sh
+COPY preprocess.sh /var/preprocess.sh
+
+COPY ./azure /var/azure
+COPY ./training /var/training
+
+RUN chmod -R 777 /var/azure
+RUN chmod -R 777 /var/training
 
 COPY fix_ui.js /var/fix_llm_ui.js
 COPY ui_scripts.json /var/llm_ui_scripts.json
 
 RUN chmod +x /var/install.sh
 RUN chmod +x /var/entrypoint.sh
-RUN chmod +x /var/train.sh
+RUN chmod +x /var/preprocess.sh
 
 RUN dos2unix /var/install.sh
 RUN dos2unix /var/entrypoint.sh
-RUN dos2unix /var/train.sh
+RUN dos2unix /var/preprocess.sh
 
 
 # Run entrypoint.sh when the container launches
