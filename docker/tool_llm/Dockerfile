@@ -31,15 +31,18 @@ RUN chmod -R 777 /var/azure
 RUN chmod -R 777 /var/training
 
 COPY fix_ui.js /var/fix_llm_ui.js
+COPY train-llama.sh /var/training/train-llama.sh
 COPY ui_scripts.json /var/llm_ui_scripts.json
 
 RUN chmod +x /var/install.sh
 RUN chmod +x /var/entrypoint.sh
 RUN chmod +x /var/preprocess.sh
+RUN chmod +x /var/training/train-llama.sh
 
 RUN dos2unix /var/install.sh
 RUN dos2unix /var/entrypoint.sh
 RUN dos2unix /var/preprocess.sh
+RUN dos2unix /var/training/train-llama.sh
 
 
 # Run entrypoint.sh when the container launches
