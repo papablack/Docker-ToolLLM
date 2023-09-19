@@ -3,7 +3,20 @@ version: '3'
 services:
   tool_llm:
     build: tool_llm
+    env_file:
+      - .env
+    environment:
+      PORT: "${WEB_PORT}"
     ports:
       - "${WEB_PORT}:${WEB_PORT}"
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            count: all
+            capabilities: [gpu]  
     volumes:
       - ../app:/app
+      - ../data:/llm_data
+      - ../ui:/llm_ui

@@ -1,0 +1,11 @@
+{
+    "scripts": {
+        "dev": "PORT=$WEB_PORT next dev",
+        "build": "PORT=$WEB_PORT next build",
+        "start": "PORT=$WEB_PORT next start",
+        "lint": "next lint",
+        "format": "prettier --write .",
+        "test": "vitest",
+        "coverage": "vitest run --coverage"
+    }
+}
