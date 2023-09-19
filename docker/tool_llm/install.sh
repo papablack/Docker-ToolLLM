@@ -12,7 +12,7 @@ if [ ! -f /var/.llm_install_done ]; then
         fi  
 
         if [ ! -d /llm_data/trained ]; then
-            mkdir /llm_data
+            mkdir /llm_data/trained
         fi
 
         cd /llm_data

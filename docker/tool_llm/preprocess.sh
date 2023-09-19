@@ -12,7 +12,7 @@ python preprocess/preprocess_retriever_data.py \
 python toolbench/retrieval/train.py \
     --data_path /llm_data/data/retrieval/G1/ \
     --model_name bert-base-uncased \
-    --output_path retrieval_model \
+    --output_path /llm_data/retrieval_model \
     --num_epochs 5 \
     --train_batch_size 32 \
     --learning_rate 2e-5 \
