@@ -8,15 +8,8 @@ services:
     environment:
       PORT: "${WEB_PORT}"
     ports:
-      - "${WEB_PORT}:${WEB_PORT}"
-    deploy:
-      resources:
-        reservations:
-          devices:
-          - driver: nvidia
-            count: all
-            capabilities: [gpu]  
+      - "${WEB_PORT}:${WEB_PORT}"    
     volumes:
-      - ../app:/app
-      - ../data:/llm_data
-      - ../ui:/llm_ui
+      - ${APP_DIR}:/app
+      - ${DATA_DIR}:/llm_data
+      - ${UI_DIR}:/llm_ui
