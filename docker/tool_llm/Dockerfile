@@ -31,7 +31,7 @@ RUN chmod -R 777 /var/azure
 RUN chmod -R 777 /var/training
 
 COPY fix_ui.js /var/fix_llm_ui.js
-COPY train-llama.sh /var/training/train-llama.sh
+COPY ./training/train-llama.sh /var/training/train-llama.sh
 COPY ui_scripts.json /var/llm_ui_scripts.json
 
 RUN chmod +x /var/install.sh
