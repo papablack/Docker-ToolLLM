@@ -1,0 +1,25 @@
+{
+
+    "LLM_DATA_PATH": "/var/llm_data",
+    "LLM_MODEL_PATH": "/var/llm_models",
+    "RAPIDAPI_KEY": "[RAPIDAPI_KEY]",
+    "OPENAI_KEY": "[OPENAI_KEY]",
+    "GPU_BF16": "True",
+    "GPU_TF32": "False",
+    "GPU_CORES": "1",
+    "TRAIN_EPOCHS_NUM": "5",  
+    "TRAIN_BATCH_SIZE": "1",
+    "TRAIN_EVAL_SIZE": "1",
+    "TRAIN_GRADIENT_STEPS": "4",
+    "TRAIN_LEARNING_RATE": "2e-5",
+    "TRAIN_WARMUP_RATIO": "0.02",
+    "TRAIN_SOURCE_MAX_LEN": "256",
+    "TRAIN_MODEL_MAX_LEN": "512",
+    "TRAIN_OBSERVATION_MAX_LEN": "64",
+
+    "PREPROCESS_EPOCHS_NUM": "3",
+    "PREPROCESS_BATCH_SIZE": "32",
+    "PREPROCESS_LEARNING_RATE": "1e-5",
+    "PREPROCESS_WARMUP_STEP": "1000",
+    "PREPROCESS_SEQ_LEN": "512"
+}

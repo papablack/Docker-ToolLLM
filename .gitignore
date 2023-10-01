@@ -1,4 +1,5 @@
 docker/.env
 ./app
-./data
+./llm_data/*
+./llm_models/*
 ./ui

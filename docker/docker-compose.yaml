@@ -12,4 +12,5 @@ services:
     volumes:
       - ${APP_DIR}:/app
       - ${DATA_DIR}:/llm_data
+      - ${MODELS_DIR}:/llm_models
       - ${UI_DIR}:/llm_ui
