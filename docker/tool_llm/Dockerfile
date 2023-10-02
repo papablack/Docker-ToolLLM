@@ -35,10 +35,10 @@ RUN apt-get install -y software-properties-common && \
         nvidia-cuda-toolkit && \
         apt-get clean
 
-RUN sudo sh -c 'echo "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/cuda.list' && \
-    sudo sh -c 'echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/cuda_learn.list'    
+RUN sh -c 'echo "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/cuda.list' && \
+    sh -c 'echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/cuda_learn.list'    
 
-RUN sudo apt-get install -y --no-install-recommends \
+RUN apt-get install -y --no-install-recommends \
     cuda-11-0 \
     libcudnn8=8.0.4.30-1+cuda11.0  \
     libcudnn8-dev=8.0.4.30-1+cuda11.0
