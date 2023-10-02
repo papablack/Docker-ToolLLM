@@ -3,10 +3,6 @@ export PYTHONPATH=$PYTHONPATH:/app
 
 sh /var/install.sh
 
-echo "Building docker for $PORT port"
-
-cd /llm_ui
-
-npm run start
+echo "LLM container awaiting action..."
 
 while true; do sleep 15 ; done;

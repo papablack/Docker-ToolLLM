@@ -7,7 +7,7 @@ json_file_path=$1
 while IFS="=" read -r key value; do
   # Remove quotes from key and value
   key=$(echo $key | tr -d '"')
-  value=$(echo $value | tr -d '"')  
+  value=$(echo $value | tr -d '"')
   
   # Replace [VAR_KEY] in JSON values with ENV values
   matches=$(echo $value | grep -o '\[[^]]*\]')
@@ -16,9 +16,13 @@ while IFS="=" read -r key value; do
     env_value=$(printenv $var_key)
     value=${value//$match/$env_value}
   done
-
+  
+  # Remove brackets [] after replacement
+  value=$(echo $value | tr -d '[]')
+  
+  # Export key-value pair as environment variable
   export $key=$value
   
   # Verify that environment variable is set and values are replaced (Optional)
   echo "$key=$value"
-done < <(jq -r 'to_entries|map(\"(.key)=\(.value|tostring)\")|.[]' $json_file_path)
+done < <(jq -r 'to_entries|map("\(.key)=\(.value|tostring)")|.[]' $json_file_path)

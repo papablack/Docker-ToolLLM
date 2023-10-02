@@ -3,14 +3,35 @@ version: '3'
 services:
   tool_llm:
     build: tool_llm
+    networks: 
+      - 'main'
+    env_file:
+      - .env
+    environment:    
+      NVIDIA_VISIBLE_DEVICES: "all"
+    runtime: nvidia    
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_PORT}"    
+    volumes:
+      - ${APP_DIR}:/app
+      - ${DATA_DIR}:/llm_data
+      - ${MODELS_DIR}:/llm_models      
+
+  llm_ui:
+    build: web_ui
+    networks: 
+      - 'main'
     env_file:
       - .env
     environment:
-      PORT: "${WEB_PORT}"
+      PORT: "${WEB_PORT}"          
     ports:
       - "${WEB_PORT}:${WEB_PORT}"    
     volumes:
       - ${APP_DIR}:/app
-      - ${DATA_DIR}:/llm_data
-      - ${MODELS_DIR}:/llm_models
       - ${UI_DIR}:/llm_ui
+
+
+networks:
+  main:
+    external: true

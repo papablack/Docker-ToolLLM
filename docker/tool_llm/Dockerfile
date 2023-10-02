@@ -1,12 +1,50 @@
 # Use an official Python runtime as a parent image
-FROM python:3.8-slim
+FROM nvidia/cuda:12.2.0-runtime-ubuntu20.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+ENV TZ=Europe/Warsaw
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Set the working directory in the container
 WORKDIR /app
 
 # Install wget
-RUN apt-get update && apt-get install -y curl unzip dos2unix nano && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y \
+    jq \
+    curl \
+    ca-certificates \
+    git \
+    bzip2 \
+    unzip \
+    nano \
+    zip \
+    dos2unix \
+    htop \
+    git-lfs \
+    libx11-6
 
+RUN apt-get install -y software-properties-common && \
+    add-apt-repository ppa:deadsnakes/ppa && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+        python3.10 \
+        python3.10-distutils \
+        python3.10-dev \
+        python3-pip \
+        nvidia-cuda-toolkit && \
+        apt-get clean
+
+RUN sudo sh -c 'echo "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/cuda.list' && \
+    sudo sh -c 'echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/cuda_learn.list'    
+
+RUN sudo apt-get install -y --no-install-recommends \
+    cuda-11-0 \
+    libcudnn8=8.0.4.30-1+cuda11.0  \
+    libcudnn8-dev=8.0.4.30-1+cuda11.0
+
+ENV LD_LIBRARY_PATH /usr/local/cuda-11.0/lib64:$LD_LIBRARY_PATH
+ENV PATH /usr/local/cuda-11.0/bin:$PATH
 
 ENV NODE_VERSION=18.16.1
 ENV NVM_DIR="/root/.nvm"
@@ -34,11 +72,8 @@ RUN chmod -R 777 /var/setenv
 
 RUN chmod 777 /var/llm_options.json
 
-COPY fix_ui.js /var/fix_llm_ui.js
 COPY ./training/train-llama.sh /var/training/train-llama.sh
-COPY ui_scripts.json /var/llm_ui_scripts.json
 
-RUN chmod +x /var/fix_llm_ui.js
 RUN chmod +x /var/install.sh
 RUN chmod +x /var/entrypoint.sh
 

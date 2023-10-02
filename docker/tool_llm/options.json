@@ -1,9 +1,4 @@
 {
-
-    "LLM_DATA_PATH": "/var/llm_data",
-    "LLM_MODEL_PATH": "/var/llm_models",
-    "RAPIDAPI_KEY": "[RAPIDAPI_KEY]",
-    "OPENAI_KEY": "[OPENAI_KEY]",
     "GPU_BF16": "True",
     "GPU_TF32": "False",
     "GPU_CORES": "1",
