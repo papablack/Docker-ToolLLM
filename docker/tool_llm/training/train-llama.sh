@@ -3,7 +3,13 @@
 export PYTHONPATH=/app
 
 cd /app
-
+echo "Preprocess ToolLlama data:"
+python3 preprocess/preprocess_toolllama_data.py \
+    --tool_data_dir $LLM_DATA_PATH/data/answer/G1_answer \
+    --method DFS_woFilter_w2 \
+    --output_file $LLM_DATA_PATH/data/answer/toolllama_G1_dfs.json
+    
+echo "Train Llama:"    
 torchrun --nproc_per_node=$GPU_CORES --master_port=20001 toolbench/train/train_mem.py \
     --model_name_or_path huggyllama/llama-2-7b  \
     --data_path  $LLM_DATA_PATH/data/toolllama_G123_dfs_train.json \

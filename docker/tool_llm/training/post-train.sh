@@ -4,7 +4,7 @@ export PYTHONPATH=/app
 export CUDA_VISIBLE_DEVICES=0
 cd /app
 
-python toolbench/inference/qa_pipeline.py \
+python3 toolbench/inference/qa_pipeline.py \
     --tool_root_dir $LLM_DATA_PATH/data/toolenv/tools/ \
     --backbone_model chatgpt_function \
     --openai_key $OPENAI_KEY \
@@ -15,7 +15,7 @@ python toolbench/inference/qa_pipeline.py \
     --rapidapi_key $RAPIDAPI_KEY \
     --use_rapidapi_key    
 
-python toolbench/inference/qa_pipeline.py \
+python3 toolbench/inference/qa_pipeline.py \
     --tool_root_dir $LLM_DATA_PATH/data/toolenv/tools/ \
     --backbone_model toolllama  \
     --model_path $LLM_MODELS_PATH/ToolLLaMA-2-7b \

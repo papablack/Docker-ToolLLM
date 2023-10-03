@@ -8,8 +8,15 @@ services:
     env_file:
       - .env
     environment:    
-      NVIDIA_VISIBLE_DEVICES: "all"
-    runtime: nvidia    
+        - NVIDIA_VISIBLE_DEVICES=all
+        - NVIDIA_DRIVER_CAPABILITIES=all    
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            count: 1
+            capabilities: [gpu]
     ports:
       - "${BACKEND_PORT}:${BACKEND_PORT}"    
     volumes:
